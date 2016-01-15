@@ -128,6 +128,12 @@ module.exports = function(config) {
         });
       });
 
+      it("does nothing when merging an identical object that contains an array (issue #94)", function() {
+        var c = Immutable({a: {b: []}});
+
+        assert.strictEqual(c, c.merge({a: {b: []}}, {deep: true}));
+      });
+
       it("does nothing when passed a merge that will result in no changes", function() {
         checkMultiple(function(immutable, mutables, runMerge) {
           // Make sure all the changes will be no-ops.
